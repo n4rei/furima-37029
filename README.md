@@ -22,6 +22,11 @@ has_many :purchases
 | price  | integer | null: false |
 | name_products  | string | null: false |
 | explanation  | text | null: false |
+| category_id  | integer | null: false |
+| condition_id  | integer | null: false |
+| delivery_id  | integer | null: false |
+| ship_from_id  | integer | null: false |
+| ship_day_id  | integer | null: false |
 | user  | references | null: false, foreign_key:true |
 
 ### Association
@@ -33,10 +38,10 @@ has_one :purchase
 |Column|Type|Options|
 | ------  | ---- | ------- |
 | postal_code  | string | null: false |
-| ship_from  | integer | null: false |
+| ship_from_id  | integer | null: false |
 | city  | string | null: false |
 | house_number  | string | null: false |
-| building_name  | string | null: false |
+| building_name  | string |
 | telephone_number  | string |
 | purchase  | references | null: false, foreign_key:true |
 
@@ -53,3 +58,4 @@ belongs_to :purchase
 ### Association
 belongs_to :user
 belongs_to :product
+has_one :destination
