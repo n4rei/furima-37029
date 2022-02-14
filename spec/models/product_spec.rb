@@ -31,27 +31,27 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Explanation can't be blank")
       end
       it "カテゴリーに「--」が選択されている場合は商品の出品ができない" do
-        @product.category_id = "--"
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
       it "商品の状態に「--」が選択されている場合は商品の出品ができない" do
-        @product.condition_id = "--"
+        @product.condition_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Condition can't be blank")
       end
       it "配送料の負担に「--」が選択されている場合は商品の出品ができない" do
-        @product.delivery_id = "--"
+        @product.delivery_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Delivery can't be blank")
       end
       it "発送元の地域に「--」が選択されている場合は商品の出品ができない" do
-        @product.ship_day_id = "--"
+        @product.ship_day_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Ship day can't be blank")
       end
       it "発送までの日数に「--」が選択されている場合は商品の出品ができない" do
-        @product.ship_from_id = "--"
+        @product.ship_from_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Ship from can't be blank")
       end
