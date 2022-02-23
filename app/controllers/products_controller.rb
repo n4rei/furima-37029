@@ -44,9 +44,14 @@ class ProductsController < ApplicationController
 
   def edit_redirect_root
     @product = Product.find(params[:id])
-    unless user_signed_in? && @product.user_id == current_user.id
+    
+    if  user_signed_in? && @product.user_id != current_user.id
       redirect_to action: :index
+
+    elsif not user_signed_in? 
+      redirect_to new_user_session_path
     end
+
   end
 
   def product_params_find
