@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to product_path
     else
-      @product.update(product_params)
       render :edit
     end
   end
@@ -44,10 +43,7 @@ class ProductsController < ApplicationController
   def edit_redirect_root
     if @product.user_id != current_user.id
       redirect_to action: :index
-    else 
-      redirect_to new_user_session_path
     end
-
   end
 
   def product_params_find
