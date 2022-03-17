@@ -48,7 +48,10 @@ class ProductsController < ApplicationController
   end
 
   def edit_redirect_root
-    if @product.user_id != current_user.id
+    @product = Product.find(params[:id])
+    if @product.user_id != current_user.id 
+      redirect_to action: :index
+    elsif @product.purchase.present?
       redirect_to action: :index
     end
   end
@@ -56,4 +59,5 @@ class ProductsController < ApplicationController
   def product_params_find
     @product = Product.find(params[:id])
   end
+
 end
