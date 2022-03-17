@@ -1,14 +1,13 @@
 class PurchasesController < ApplicationController
   before_action :index_redirect_root, only: [:index]
-  
+  before_action :product_find_params, only: [:index, :create]
+
   def index
-    @product = Product.find(params[:product_id])
     @product_purchase = ProductPurchase.new
   end
 
   def create
     @product_purchase = ProductPurchase.new(purchase_params)
-    @product = Product.find(params[:product_id])
     if @product_purchase.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
@@ -34,8 +33,12 @@ class PurchasesController < ApplicationController
 
   def index_redirect_root
     @product = Product.find(params[:product_id])
-    if @product.purchase.present?
+    if @product.user_id == current_user.id || @product.purchase.present?
       redirect_to root_path
     end
+  end
+
+  def product_find_params
+    @product = Product.find(params[:product_id])
   end
 end

@@ -7,5 +7,7 @@ FactoryBot.define do
     building_name{"シャルマン"}
     telephone_number{"09012345678"}
     token{"test"}
+    user_id{1}
+    product_id{1}
   end
 end

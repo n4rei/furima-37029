@@ -54,8 +54,13 @@ RSpec.describe ProductPurchase, type: :model do
         @product_purchase.valid?
         expect(@product_purchase.errors.full_messages).to include("Telephone number can't be blank", "Telephone number is invalid")
       end
-      it 'telephone_numberが10桁以上11桁以内でないと保存できないこと' do
+      it 'telephone_numberが9桁以内だと保存できないこと' do
         @product_purchase.telephone_number= "111111111"
+        @product_purchase.valid?
+        expect(@product_purchase.errors.full_messages).to include("Telephone number is invalid")
+      end
+      it 'telephone_numberが12桁以上だと保存できないこと' do
+        @product_purchase.telephone_number= "111111111111"
         @product_purchase.valid?
         expect(@product_purchase.errors.full_messages).to include("Telephone number is invalid")
       end
@@ -68,6 +73,16 @@ RSpec.describe ProductPurchase, type: :model do
         @product_purchase.token= ""
         @product_purchase.valid?
         expect(@product_purchase.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが紐づいていなければ保存できないこと' do
+        @product_purchase.user_id= ""
+        @product_purchase.valid?
+        expect(@product_purchase.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが紐づいていなければ保存できないこと' do
+        @product_purchase.product_id= ""
+        @product_purchase.valid?
+        expect(@product_purchase.errors.full_messages).to include("Product can't be blank")
       end
     end
   end
