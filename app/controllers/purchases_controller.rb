@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
-  before_action :index_redirect_root, only: [:index]
   before_action :product_find_params, only: [:index, :create]
+  before_action :index_redirect_root, only: [:index]
 
   def index
     @product_purchase = ProductPurchase.new
@@ -18,7 +18,6 @@ class PurchasesController < ApplicationController
       @product_purchase.save
       redirect_to root_path
     else
-      @product = Product.find(params[:product_id])
       render :index
     end
     
@@ -32,7 +31,6 @@ class PurchasesController < ApplicationController
   end
 
   def index_redirect_root
-    @product = Product.find(params[:product_id])
     if @product.user_id == current_user.id || @product.purchase.present?
       redirect_to root_path
     end
